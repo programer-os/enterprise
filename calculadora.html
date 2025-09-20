@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-color: auto;
+      background: linear-gradient(purple 24%, skyblue 100%);
+}
+
+.calculator {
+  background-color: linear-gradient (cyan 40%, pink 70%);
+  padding: 20px;
+  border-radius: 10px;
+  width: 1320px;
+}
+
+.display {
+  width: calc(100% - 20px);
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 24px;
+  border: none;
+  background-color: auto;
+  color: auto;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;;
+background: linear-gradient(pink 0%, skyblue 40%);
+  color: pink;
+  /*violet 100%);*/
+}
+
+button {
+  padding: 15px;
+  font-size: 20px;
+  border: 4px solid;
+  background-color: linear-gradient(pink 45%, green 70%);
+  color: blue;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  border: 4px solid;
+  background-color: skyblue;
+  transform: escale(1.5);
+}
+
+    
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" class="display" id="display" disabled, style="color: ; transform: escale(3.4);">
+    <div class="keys">
+      <button class="button" onclick="clearDisplay()">AC</button>
+      <button class="button" onclick="deleteLast()">DEL</button>
+      <button class="button" onclick="appendOperator('%')">%</button>
+      <button class="button" onclick="appendOperator('/')">/</button>
+      <button class="button" onclick="appendNumber(7)">7</button>
+      <button class="button" onclick="appendNumber(8)">8</button>
+      <button class="button" onclick="appendNumber(9)">9</button>
+      <button class="button" onclick="appendOperator('*')">*</button>
+      <button class="button" onclick="appendNumber(4)">4</button>
+      <button class="button" onclick="appendNumber(5)">5</button>
+      <button class="button" onclick="appendNumber(6)">6</button>
+      <button class="button" onclick="appendOperator('-')">-</button>
+      <button class="button" onclick="appendNumber(1)">1</button>
+      <button class="button" onclick="appendNumber(2)">2</button>
+      <button class="button" onclick="appendNumber(3)">3</button>
+      <button class="button" onclick="appendOperator('+')">+</button>
+      <button class="button" onclick="appendNumber(0)">0</button>
+      <button class="button" onclick="appendDoubleZero()">00</button>
+      <button class="button" onclick="appendDecimal()">.</button>
+      <button class="button" onclick="calculate()">=</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+  let display = document.getElementById('display');
+let buttons = document.querySelectorAll('.button');
+
+let string = '';
+
+buttons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        if (e.target.innerHTML == 'DEL') {
+            string = string.substring(0, string.length - 1);
+            display.value = string;
+        } else if (e.target.innerHTML == 'AC') {
+            string = '';
+            display.value = string;
+        } else if (e.target.innerHTML == '=') {
+            try {
+                string = eval(string);
+                display.value = string;
+            } catch (error) {
+                display.value = 'Error';
+            }
+        } else {
+            string += e.target.innerHTML;
+            display.value = string;
+        }
+    });
+});
+</script>
+</body>
+</html>
